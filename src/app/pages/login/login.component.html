@@ -1,0 +1,86 @@
+<div class="min-h-screen flex bg-gray-100">
+  <div
+    class="hidden lg:flex lg:w-1/2 relative bg-gray-200 rounded-edge overflow-hidden h-screen"
+    style="
+      background-image: url('/images/login-bg.png');
+      background-size: cover;
+      background-position: center;
+    "
+  ></div>
+
+  <div
+    class="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative"
+  >
+    <img
+      src="/images/thebridge_blue_logoweb.png"
+      alt="The Bridge Logo"
+      class="max-w-xs w-full h-auto absolute top-10 right-10"
+    />
+    <div class="max-w-md w-full flex flex-col gap-8">
+      <div class="flex flex-col items-center">
+        <h2 class="text-center text-2xl font-light text-gray-900 relative">
+          Sign in to Gate Pass
+        </h2>
+        <svg
+          class="mt-2"
+          width="220"
+          height="16"
+          viewBox="0 0 220 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M 0 8 Q 55 2, 110 8 T 220 8"
+            stroke="#020887"
+            stroke-width="1.5"
+            fill="none"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+      <form
+        [formGroup]="loginForm"
+        class="mt-8 flex flex-col gap-5"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="flex flex-col gap-5 mb-5">
+          <app-input
+            id="email"
+            [control]="emailControl"
+            [label]="'Email address'"
+            type="email"
+            placeholder="Email address"
+            [required]="true"
+            [errorMessage]="
+              emailControl.touched && emailControl.invalid
+                ? getEmailErrorMessage()
+                : ''
+            "
+          />
+          <app-input
+            id="password"
+            [control]="passwordControl"
+            [label]="'Password'"
+            type="password"
+            placeholder="Password"
+            [required]="true"
+            [errorMessage]="
+              passwordControl.touched && passwordControl.invalid
+                ? getPasswordErrorMessage()
+                : ''
+            "
+          />
+        </div>
+
+        <app-button
+          type="submit"
+          size="md"
+          [loading]="isLoggingIn()"
+          [disabled]="isButtonDisabled()"
+        >
+          Sign in
+        </app-button>
+      </form>
+    </div>
+  </div>
+</div>
