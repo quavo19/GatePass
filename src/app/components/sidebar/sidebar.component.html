@@ -1,0 +1,42 @@
+<div class="h-screen w-64 bg-white flex flex-col">
+  <div class="p-6">
+    <img
+      src="/images/thebridge_blue_logoweb.png"
+      alt="The Bridge Logo"
+      class="w-full h-auto"
+    />
+  </div>
+
+  <nav class="flex-1 p-4">
+    <ul class="space-y-2">
+      @for (item of getVisibleItems(); track item.route) {
+      <li>
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="bg-primary-blue text-white"
+          [routerLinkActiveOptions]="{ exact: item.route === '/check-in' }"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl font-light text-gray-700 transition-colors"
+        >
+          <app-icon [name]="item.icon" className="w-5 h-5" />
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+      }
+    </ul>
+  </nav>
+
+  <div class="p-4">
+    <button
+      type="button"
+      (click)="logout()"
+      [disabled]="isLoggingOut()"
+      class="flex items-center justify-center gap-3 pr-4 pl-1 py-3 rounded-xl bg-gray-200 font-light text-gray-700 hover:bg-gray-300 transition-colors w-full disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      <app-icon [name]="IconName.Logout" className="w-5 h-5" />
+      <span>Logout</span>
+      @if (isLoggingOut()) {
+      <app-icon [name]="IconName.Loading" className="w-4 h-4 ml-auto" />
+      }
+    </button>
+  </div>
+</div>

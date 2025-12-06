@@ -1,11 +1,4 @@
-import {
-  Component,
-  signal,
-  computed,
-  effect,
-  DestroyRef,
-  inject,
-} from '@angular/core';
+import { Component, signal, computed, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
@@ -13,17 +6,32 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ButtonComponent } from '../../components/button/button.component';
 import { InputComponent } from '../../components/input/input.component';
+import { IconComponent } from '../../components/icons/icons.component';
+import { IconName } from '../../constants/icons';
 import { emailValidator, getErrorMessage } from '../../utils/validators';
+import { AuthService } from '../../services/auth.service';
+import { LoginRequest } from '../../interfaces/api.interface';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, ButtonComponent, InputComponent],
+  imports: [
+    ReactiveFormsModule,
+    ButtonComponent,
+    InputComponent,
+    IconComponent,
+  ],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
+  protected readonly IconName = IconName;
   private readonly destroyRef = inject(DestroyRef);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly toastService = inject(ToastService);
 
   protected readonly isLoggingIn = signal(false);
   protected readonly isFormInvalid = signal(true);
@@ -66,11 +74,33 @@ export class LoginComponent {
   protected onSubmit(): void {
     if (this.loginForm.valid) {
       this.isLoggingIn.set(true);
-      // Simulate API call
-      setTimeout(() => {
-        console.log('Login attempt:', this.loginForm.value);
-        this.isLoggingIn.set(false);
-      }, 2000);
+      const credentials: LoginRequest = {
+        user: {
+          email: this.loginForm.value.email || '',
+          password: this.loginForm.value.password || '',
+        },
+      };
+
+      this.authService
+        .login(credentials)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: (response) => {
+            if (response.status.code === 200) {
+              this.toastService.success(
+                'Login Successful',
+                response.status.message
+              );
+              // Navigate to check-in page after successful login
+              this.router.navigate(['/check-in']);
+            }
+            this.isLoggingIn.set(false);
+          },
+          error: (error) => {
+            this.toastService.error('Login Failed', error?.error?.message);
+            this.isLoggingIn.set(false);
+          },
+        });
     } else {
       Object.keys(this.loginForm.controls).forEach((key) => {
         this.loginForm.get(key)?.markAsTouched();

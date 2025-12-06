@@ -30,6 +30,19 @@
     >
       <ng-content select="[slot=right-icon]"></ng-content>
     </div>
+    } @if (isPasswordType()) {
+    <button
+      type="button"
+      class="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-gray-500 hover:text-gray-700 focus:outline-none"
+      (click)="togglePasswordVisibility()"
+      tabindex="-1"
+    >
+      @if (showPassword()) {
+      <app-icon [name]="IconName.EyeClosed" className="w-5 h-5" />
+      } @else {
+      <app-icon [name]="IconName.EyeOpen" className="w-5 h-5" />
+      }
+    </button>
     } @if (textarea()) {
     <textarea
       [id]="id()"
@@ -49,11 +62,11 @@
     } @else {
     <input
       [id]="id()"
-      [type]="type()"
+      [type]="inputType()"
       [placeholder]="placeholder()"
       [formControl]="control()"
       [class.pl-10]="hasLeftIcon()"
-      [class.pr-10]="hasRightIcon()"
+      [class.pr-10]="hasRightIcon() || isPasswordType()"
       [attr.disabled]="isDisabled() ? '' : null"
       [class.rounded-r-none]="isForChatBox()"
       (blur)="inputBlur.emit($event)"

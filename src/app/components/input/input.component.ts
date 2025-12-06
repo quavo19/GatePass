@@ -1,14 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output, effect } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  effect,
+  signal,
+  computed,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { IconComponent } from '../icons/icons.component';
+import { IconName } from '../../constants/icons';
 
 @Component({
   selector: 'app-input',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, IconComponent],
   standalone: true,
   templateUrl: './input.component.html',
 })
 export class InputComponent {
+  protected readonly IconName = IconName;
   public readonly label = input<string>();
   public readonly type = input<string>('text');
   public readonly className = input<string>('');
@@ -27,6 +37,22 @@ export class InputComponent {
   public readonly textarea = input<boolean>(false);
 
   public readonly inputBlur = output<FocusEvent>();
+
+  protected readonly showPassword = signal(false);
+
+  protected readonly isPasswordType = computed(
+    () => this.type() === 'password'
+  );
+  protected readonly inputType = computed(() => {
+    if (this.isPasswordType()) {
+      return this.showPassword() ? 'text' : 'password';
+    }
+    return this.type();
+  });
+
+  protected togglePasswordVisibility(): void {
+    this.showPassword.update((value) => !value);
+  }
 
   constructor() {
     effect(() => {
