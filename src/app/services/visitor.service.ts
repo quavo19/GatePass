@@ -16,6 +16,7 @@ import {
   LatestCheckOutsResponse,
   VisitorLogsResponse,
   TimePeriod,
+  AnalyticsResponse,
 } from '../interfaces/api.interface';
 import { ApiService } from './api.service';
 
@@ -120,5 +121,9 @@ export class VisitorService {
       ENDPOINTS.VISITORS.LOGS,
       params
     );
+  }
+
+  getAnalytics(): Observable<AnalyticsResponse> {
+    return this.apiService.get<AnalyticsResponse>(ENDPOINTS.VISITORS.ANALYTICS);
   }
 }

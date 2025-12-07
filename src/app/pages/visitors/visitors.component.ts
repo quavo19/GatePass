@@ -8,11 +8,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule, DatePipe } from '@angular/common';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { VisitorService } from '../../services/visitor.service';
 import { ToastService } from '../../services/toast.service';
@@ -23,7 +19,10 @@ import {
 } from '../../interfaces/api.interface';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { InputComponent } from '../../components/input/input.component';
-import { SelectComponent, SelectOption } from '../../components/select/select.component';
+import {
+  SelectComponent,
+  SelectOption,
+} from '../../components/select/select.component';
 import { IconComponent } from '../../components/icons/icons.component';
 import { IconName } from '../../constants/icons';
 
@@ -127,12 +126,6 @@ export class VisitorsComponent implements OnInit {
           this.isLoading.set(false);
         },
       });
-  }
-
-  protected getStatusClass(status: string): string {
-    return status === 'checked_in'
-      ? 'bg-green-100 text-green-800'
-      : 'bg-gray-100 text-gray-800';
   }
 
   protected getStatusLabel(status: string): string {

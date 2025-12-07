@@ -13,6 +13,7 @@ export const ENDPOINTS = {
     CHECK_OUT: '/api/v1/visitors/checkout',
     LATEST_CHECK_OUTS: '/api/v1/visitors/check-outs/latest',
     LOGS: '/api/v1/visitors/logs',
+    ANALYTICS: '/api/v1/visitors/analytics',
   },
   STAFF: {
     MEMBERS: '/api/v1/staff-members',

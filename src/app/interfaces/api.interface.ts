@@ -182,3 +182,36 @@ export interface PaginationInfo {
 export interface VisitorLogsResponse extends ApiResponse<VisitorLog[]> {
   pagination: PaginationInfo;
 }
+
+export interface DepartmentVisit {
+  department: string;
+  count: number;
+}
+
+export interface MonthlyVisit {
+  month: string;
+  monthName: string;
+  count: number;
+}
+
+export interface MostVisitedStaff {
+  id: number;
+  name: string;
+  department: string;
+  visitCount: number;
+}
+
+export interface MostFrequentVisitor {
+  fullName: string;
+  phone: string;
+  visitCount: number;
+}
+
+export interface AnalyticsData {
+  departmentVisits: DepartmentVisit[];
+  monthlyVisits: MonthlyVisit[];
+  mostVisitedStaff: MostVisitedStaff[];
+  mostFrequentVisitors: MostFrequentVisitor[];
+}
+
+export interface AnalyticsResponse extends ApiResponse<AnalyticsData> {}

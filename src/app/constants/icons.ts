@@ -22,6 +22,7 @@ export enum IconName {
   Briefcase = 'briefcase',
   Ticket = 'ticket',
   Calendar = 'calendar',
+  Chart = 'chart',
 }
 
 export type IconNameType = `${IconName}`;
