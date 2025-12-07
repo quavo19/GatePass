@@ -39,6 +39,14 @@ The app is fully responsive and styled using **Tailwind CSS**.
 
 ---
 
+## 📝 Note
+
+THE OTP DURING CHECKIN IS SENT TO THE TOAST NOTIFICATION. I ask that you please copy it from there to proceed. 
+<img width="396" height="108" alt="Screenshot 2025-12-07 at 10 49 41 pm" src="https://github.com/user-attachments/assets/f7587ec1-49e0-4bb1-8b8f-4d6f55635c01" />
+
+
+---
+
 ## 🖼 Screenshots
 
 ### User Check-In
