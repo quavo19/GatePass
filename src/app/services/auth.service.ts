@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Observable, tap, map, of, catchError } from 'rxjs';
 import { ENDPOINTS } from '../constants/apis';
 import {
@@ -21,6 +21,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private readonly http = inject(HttpClient);
   private currentUser: User | null = null;
+  private readonly currentUserSignal = signal<User | null>(null);
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http
@@ -33,6 +34,7 @@ export class AuthService {
         tap((response) => {
           if (response.body && response.body.status.code === 200) {
             this.currentUser = response.body.data;
+            this.currentUserSignal.set(response.body.data);
             const authHeader = response.headers.get('Authorization');
             if (authHeader) {
               setToken(authHeader);
@@ -54,11 +56,13 @@ export class AuthService {
       .pipe(
         tap(() => {
           this.currentUser = null;
+          this.currentUserSignal.set(null);
           removeToken();
         }),
         map(() => void 0),
         catchError(() => {
           this.currentUser = null;
+          this.currentUserSignal.set(null);
           removeToken();
           return of(void 0);
         })
@@ -72,6 +76,7 @@ export class AuthService {
         tap((response) => {
           if (response.status.code === 200) {
             this.currentUser = response.data;
+            this.currentUserSignal.set(response.data);
           }
         })
       );
@@ -87,12 +92,17 @@ export class AuthService {
       map((response) => response.data),
       tap((user) => {
         this.currentUser = user;
+        this.currentUserSignal.set(user);
       })
     );
   }
 
   getCurrentUser(): User | null {
     return this.currentUser;
+  }
+
+  getCurrentUserSignal() {
+    return this.currentUserSignal.asReadonly();
   }
 
   isAuthenticated(): boolean {

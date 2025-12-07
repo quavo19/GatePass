@@ -1,0 +1,46 @@
+<div class="bg-gray-50 rounded-lg p-4 transition-all">
+  <div class="flex items-start gap-3 mb-3">
+    <div
+      class="w-10 h-10 bg-primary-blue/10 rounded-full flex items-center justify-center flex-shrink-0"
+    >
+      <app-icon [name]="IconName.User" className="w-5 h-5 text-primary-blue" />
+    </div>
+    <div class="flex-1 min-w-0">
+      <p class="font-medium text-gray-900 truncate">
+        {{ visitor().fullName }}
+      </p>
+      <div class="flex items-center gap-1 mt-1">
+        <app-icon [name]="IconName.Phone" className="w-3 h-3 text-gray-400" />
+        <p class="text-sm text-gray-600">{{ visitor().phone }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-2 mt-3 pt-3 border-t border-gray-200">
+    <div class="flex items-start gap-2">
+      <app-icon
+        [name]="IconName.Briefcase"
+        className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+      />
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-gray-500 font-light">Staff Member</p>
+        <p class="text-sm text-gray-900">
+          {{ visitor().staffMember }}
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-2">
+      <app-icon
+        [name]="IconName.Calendar"
+        className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+      />
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-gray-500 font-light">Check-In Time</p>
+        <p class="text-sm text-gray-900">
+          {{ visitor().checkInTime | date : "short" }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

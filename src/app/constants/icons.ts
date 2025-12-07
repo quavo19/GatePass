@@ -7,12 +7,21 @@ export enum IconName {
   XCircle = 'x-circle',
   X = 'x',
   ArrowRight = 'arrow-right',
+  ArrowLeft = 'arrow-left',
   Logout = 'logout',
   CheckIn = 'check-in',
   CheckOut = 'check-out',
   Dashboard = 'dashboard',
   Users = 'users',
   Loading = 'loading',
+  Phone = 'phone',
+  User = 'user',
+  Card = 'card',
+  Clock = 'clock',
+  ChevronDown = 'chevron-down',
+  Briefcase = 'briefcase',
+  Ticket = 'ticket',
+  Calendar = 'calendar',
 }
 
 export type IconNameType = `${IconName}`;

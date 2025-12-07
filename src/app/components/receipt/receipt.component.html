@@ -1,0 +1,51 @@
+<div class="receipt-container rounded-xl p-6">
+  <div class="text-center space-y-4">
+    <div class="flex justify-center">
+      <div
+        class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center"
+      >
+        <app-icon
+          [name]="IconName.CheckCircle"
+          className="w-10 h-10 text-green-600"
+        />
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-light text-gray-900 mb-2">
+        Check-In Successful!
+      </h2>
+      <p class="text-sm text-gray-600">
+        Your visitor check-in has been completed successfully.
+      </p>
+    </div>
+
+    <div class="bg-gray-50 rounded-lg p-6 space-y-4 text-left max-w-md mx-auto">
+      <div>
+        <p class="text-sm text-gray-600 font-light mb-1">Ticket Number</p>
+        <p class="text-lg font-semibold text-gray-900">
+          {{ checkInData().ticketNumber }}
+        </p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-600 font-light mb-1">Full Name</p>
+        <p class="text-base text-gray-900">
+          {{ checkInData().visitor.fullName }}
+        </p>
+      </div>
+    </div>
+
+    <div class="pt-4 flex gap-4 justify-center w-full">
+      @if (onNewCheckIn()) {
+      <app-button
+        type="button"
+        (click)="handleNewCheckIn()"
+        class="w-full max-w-md"
+      >
+        New Check-In
+        <app-icon [name]="IconName.ArrowRight" className="w-4 h-4" />
+      </app-button>
+      }
+    </div>
+  </div>
+</div>

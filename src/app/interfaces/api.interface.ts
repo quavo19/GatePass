@@ -37,3 +37,58 @@ export interface NavigationItem {
   icon: IconNameType;
 }
 
+export interface OtpRequest {
+  phone: string;
+}
+
+export interface OtpResponse extends ApiResponse<{ message: string }> {}
+
+export interface OtpVerifyRequest {
+  phone: string;
+  otp: string;
+}
+
+export interface OtpVerifyResponse extends ApiResponse<{ verified: boolean }> {}
+
+export interface CheckInRequest {
+  fullName: string;
+  phone: string;
+  ghanaCardNumber: string;
+  staffMemberId: string | number;
+  purpose: string;
+}
+
+export interface CheckInResponse
+  extends ApiResponse<{
+    ticketNumber: string;
+    visitor: {
+      fullName: string;
+      phone: string;
+      ghanaCardNumber: string;
+      staffMember: string;
+      purpose: string;
+      checkInTime: string;
+      status: 'checked_in' | 'checked_out';
+    };
+  }> {}
+
+export interface StaffMember {
+  id: number;
+  name: string;
+  department: string;
+}
+
+export interface StaffMembersResponse extends ApiResponse<StaffMember[]> {}
+
+export interface LatestCheckIn {
+  id: string;
+  fullName: string;
+  phone: string;
+  staffMember: string;
+  purpose: string;
+  ticketNumber: string;
+  checkInTime: string;
+  status: 'checked_in' | 'checked_out';
+}
+
+export interface LatestCheckInsResponse extends ApiResponse<LatestCheckIn[]> {}

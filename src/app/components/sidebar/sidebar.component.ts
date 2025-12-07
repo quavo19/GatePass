@@ -19,9 +19,7 @@ export class SidebarComponent {
   protected readonly navigationItems = NAVIGATION_ITEMS;
   protected readonly IconName = IconName;
   protected readonly isLoggingOut = signal(false);
-  protected readonly currentUser = computed(() =>
-    this.authService.getCurrentUser()
-  );
+  protected readonly currentUser = this.authService.getCurrentUserSignal();
 
   protected getVisibleItems() {
     const user = this.currentUser();

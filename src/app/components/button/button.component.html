@@ -2,9 +2,12 @@
   [type]="type()"
   [disabled]="loading() || disabled()"
   [class]="
-    'bg-primary-blue disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-light rounded-xl w-full transition-colors duration-150 ' +
-    'hover:bg-primary-blue-hover active:bg-primary-blue-active ' +
-    (size() === 'sm' ? 'px-3 py-1.5 text-sm' : 'px-4 py-3 text-base')
+    (variant() === 'primary'
+      ? 'bg-primary-blue disabled:bg-gray-400 disabled:cursor-not-allowed text-white hover:bg-primary-blue-hover active:bg-primary-blue-active '
+      : 'bg-white disabled:bg-gray-100 disabled:cursor-not-allowed text-gray-900 border border-gray-300 hover:bg-gray-50 active:bg-gray-100 ') +
+    'font-light rounded-xl transition-colors duration-150 ' +
+    (size() === 'sm' ? 'px-3 py-1.5 text-sm' : 'px-4 py-3 text-base') +
+    (className() ? ' ' + className() : ' w-full')
   "
 >
   <span class="flex items-center justify-center gap-2">
