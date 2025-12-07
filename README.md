@@ -1,59 +1,133 @@
-# GatePass
+# Bridge Blueprint GatePass - Angular Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+[🌐 Live Demo](https://curious-lolly-f1d397.netlify.app)
+[📦 Frontend Repo](https://github.com/quavo19/GatePass) | [🛠 Backend API](https://github.com/quavo19/GatePassApi)
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Project Overview
+
+**Bridge Blueprint GatePass** is a simple, responsive **check-in / check-out system** built with **Angular 17** (frontend) and **Rails 8** (backend).
+
+It is designed to streamline visitor management by allowing:
+
+- Visitors to check in with personal details
+- Automatic ticket generation for checkout
+- Admins to track logs and analytics
+
+The app is fully responsive and styled using **Tailwind CSS**.
+
+---
+
+## 🎯 Features
+
+### For Users
+
+- Enter visitor information
+- Receive a check-in ticket
+- Check out using the ticket
+
+### For Admins
+
+- View visitor logs
+- Track top visits and analytics
+
+### Authentication
+
+- **User:** `user@example.com` / `password123`
+- **Admin:** `admin@example.com` / `password123`
+
+---
+
+## 🖼 Screenshots
+
+### User Check-In
+
+![User Check-In](./screenshots/user-checkin.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](./screenshots/admin-dashboard.png)
+
+_(Replace placeholders with actual screenshots.)_
+
+---
+
+## 💻 Tech Stack
+
+| Layer    | Technology                                              |
+| -------- | ------------------------------------------------------- |
+| Frontend | Angular 17, Tailwind CSS                                |
+| Backend  | Ruby on Rails 8, PostgreSQL                             |
+| Hosting  | Frontend: Netlify, Backend: Render / Local Rails Server |
+
+---
+
+## ⚡ Quick Start - Frontend
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/quavo19/GatePass.git
+cd GatePass
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+4. Open your browser at [http://localhost:4200](http://localhost:4200)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## ⚡ Quick Start - Backend
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Clone the Rails API repo:
 
 ```bash
-ng generate --help
+git clone https://github.com/quavo19/GatePassApi.git
+cd GatePassApi
 ```
 
-## Building
-
-To build the project run:
+2. Install Ruby dependencies:
 
 ```bash
-ng build
+bundle install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+3. Create and migrate the database:
 
 ```bash
-ng test
+rails db:create
+rails db:migrate
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+4. Start the Rails server:
 
 ```bash
-ng e2e
+rails s
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+5. Make sure the frontend points to your backend API (default: `http://localhost:3000`)
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📝 Notes
+
+- If the live backend is unavailable, running the Rails backend locally is necessary.
+- Tailwind CSS is used for fast, responsive UI development.
+- Admin dashboards provide analytics and logs for better visitor management.
+
+---
+
+## 📜 License
+
+MIT License © Bridge Blueprint Solutions
