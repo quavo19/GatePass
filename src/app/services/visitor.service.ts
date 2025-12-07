@@ -10,6 +10,12 @@ import {
   CheckInResponse,
   StaffMembersResponse,
   LatestCheckInsResponse,
+  VisitorByTicketResponse,
+  CheckOutRequest,
+  CheckOutResponse,
+  LatestCheckOutsResponse,
+  VisitorLogsResponse,
+  TimePeriod,
 } from '../interfaces/api.interface';
 import { ApiService } from './api.service';
 
@@ -72,6 +78,47 @@ export class VisitorService {
     return this.apiService.get<LatestCheckInsResponse>(
       ENDPOINTS.VISITORS.LATEST_CHECK_INS,
       { limit }
+    );
+  }
+
+  getVisitorByTicketNumber(
+    ticketNumber: string
+  ): Observable<VisitorByTicketResponse> {
+    return this.apiService.get<VisitorByTicketResponse>(
+      ENDPOINTS.VISITORS.BY_TICKET,
+      { ticketNumber }
+    );
+  }
+
+  checkOut(request: CheckOutRequest): Observable<CheckOutResponse> {
+    return this.apiService.post<CheckOutResponse>(
+      ENDPOINTS.VISITORS.CHECK_OUT,
+      request
+    );
+  }
+
+  getLatestCheckOuts(limit: number = 5): Observable<LatestCheckOutsResponse> {
+    return this.apiService.get<LatestCheckOutsResponse>(
+      ENDPOINTS.VISITORS.LATEST_CHECK_OUTS,
+      { limit }
+    );
+  }
+
+  getVisitorLogs(
+    page: number = 1,
+    ticketNumber?: string,
+    timePeriod?: TimePeriod
+  ): Observable<VisitorLogsResponse> {
+    const params: Record<string, string | number> = { page };
+    if (ticketNumber) {
+      params['ticketNumber'] = ticketNumber;
+    }
+    if (timePeriod) {
+      params['timePeriod'] = timePeriod;
+    }
+    return this.apiService.get<VisitorLogsResponse>(
+      ENDPOINTS.VISITORS.LOGS,
+      params
     );
   }
 }

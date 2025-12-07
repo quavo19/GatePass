@@ -42,5 +42,19 @@
         </p>
       </div>
     </div>
+    @if (getCheckOutTime()) {
+    <div class="flex items-start gap-2">
+      <app-icon
+        [name]="IconName.Clock"
+        className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+      />
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-gray-500 font-light">Check-Out Time</p>
+        <p class="text-sm text-gray-900">
+          {{ getCheckOutTime() | date : "short" }}
+        </p>
+      </div>
+    </div>
+    }
   </div>
 </div>

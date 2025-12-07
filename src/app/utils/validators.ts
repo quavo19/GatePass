@@ -57,6 +57,25 @@ export const otpValidator = (): ValidatorFn => {
   };
 };
 
+export const ticketNumberValidator = (): ValidatorFn => {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) {
+      return null;
+    }
+    // Ticket number format: VIS-YYYYMMDD-XXXXX (e.g., VIS-20251207-34273)
+    const ticketRegex = /^VIS-\d{8}-\d{5}$/;
+    const isValid = ticketRegex.test(control.value.toUpperCase());
+    return isValid
+      ? null
+      : {
+          ticketNumber: {
+            message:
+              'Please enter a valid ticket number (format: VIS-YYYYMMDD-XXXXX)',
+          },
+        };
+  };
+};
+
 export const getErrorMessage = (
   control: AbstractControl,
   fieldName: string
@@ -86,6 +105,12 @@ export const getErrorMessage = (
   }
   if (control.hasError('otp')) {
     return control.getError('otp')?.message || 'Please enter a valid OTP';
+  }
+  if (control.hasError('ticketNumber')) {
+    return (
+      control.getError('ticketNumber')?.message ||
+      'Please enter a valid ticket number'
+    );
   }
   return '';
 };

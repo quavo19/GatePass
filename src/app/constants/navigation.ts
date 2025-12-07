@@ -5,13 +5,13 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   {
     label: 'Check-In',
     route: '/check-in',
-    roles: ['User', 'Admin'],
+    roles: ['User'],
     icon: IconName.CheckIn,
   },
   {
     label: 'Check-Out',
     route: '/check-out',
-    roles: ['User', 'Admin'],
+    roles: ['User'],
     icon: IconName.CheckOut,
   },
   {

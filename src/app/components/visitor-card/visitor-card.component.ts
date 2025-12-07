@@ -2,7 +2,10 @@ import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icons/icons.component';
 import { IconName } from '../../constants/icons';
-import { LatestCheckIn } from '../../interfaces/api.interface';
+import {
+  LatestCheckIn,
+  LatestCheckOut,
+} from '../../interfaces/api.interface';
 
 @Component({
   selector: 'app-visitor-card',
@@ -12,6 +15,13 @@ import { LatestCheckIn } from '../../interfaces/api.interface';
 })
 export class VisitorCardComponent {
   protected readonly IconName = IconName;
-  public readonly visitor = input.required<LatestCheckIn>();
+  public readonly visitor = input.required<LatestCheckIn | LatestCheckOut>();
+
+  protected getCheckOutTime(): string | null {
+    const v = this.visitor();
+    return v.status === 'checked_out' && 'checkOutTime' in v
+      ? v.checkOutTime
+      : null;
+  }
 }
 

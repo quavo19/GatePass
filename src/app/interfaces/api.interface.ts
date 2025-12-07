@@ -92,3 +92,93 @@ export interface LatestCheckIn {
 }
 
 export interface LatestCheckInsResponse extends ApiResponse<LatestCheckIn[]> {}
+
+export interface VisitorByTicketRequest {
+  ticketNumber: string;
+}
+
+export interface VisitorByTicketData {
+  id: string;
+  fullName: string;
+  phone: string;
+  ghanaCardNumber: string;
+  staffMember: string;
+  purpose: string;
+  ticketNumber: string;
+  checkInTime: string;
+  checkOutTime: string | null;
+  status: 'checked_in' | 'checked_out';
+}
+
+export interface VisitorByTicketResponse
+  extends ApiResponse<VisitorByTicketData[]> {}
+
+export interface CheckOutRequest {
+  ticketNumber: string;
+}
+
+export interface CheckOutResponse
+  extends ApiResponse<{
+    ticketNumber: string;
+    visitor: {
+      fullName: string;
+      phone: string;
+      ghanaCardNumber: string;
+      staffMember: string;
+      purpose: string;
+      checkInTime: string;
+      checkOutTime: string;
+      status: 'checked_out';
+    };
+  }> {}
+
+export interface LatestCheckOut {
+  id: string;
+  fullName: string;
+  phone: string;
+  staffMember: string;
+  purpose: string;
+  ticketNumber: string;
+  checkInTime: string;
+  checkOutTime: string;
+  status: 'checked_out';
+}
+
+export interface LatestCheckOutsResponse
+  extends ApiResponse<LatestCheckOut[]> {}
+
+export enum TimePeriod {
+  TODAY = 'today',
+  THIS_WEEK = 'thisweek',
+  THIS_MONTH = 'thismonth',
+  THIS_YEAR = 'thisyear',
+}
+
+export enum VisitorStatus {
+  CHECKED_IN = 'checked_in',
+  CHECKED_OUT = 'checked_out',
+}
+
+export interface VisitorLog {
+  id: string;
+  fullName: string;
+  phone: string;
+  ghanaCardNumber: string;
+  staffMember: string;
+  purpose: string;
+  ticketNumber: string;
+  checkInTime: string;
+  checkOutTime: string | null;
+  status: VisitorStatus;
+}
+
+export interface PaginationInfo {
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  perPage: number;
+}
+
+export interface VisitorLogsResponse extends ApiResponse<VisitorLog[]> {
+  pagination: PaginationInfo;
+}

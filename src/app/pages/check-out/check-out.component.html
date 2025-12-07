@@ -1,6 +1,277 @@
-<div class="bg-gray-50 p-8 min-h-full">
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-3xl font-light text-gray-900 mb-8">Check-Out</h1>
-    <!-- Check-Out content will go here -->
+<div
+  class="bg-gray-50 p-8 min-h-full max-w-[1600px] mx-auto flex md:flex-row flex-col w-full gap-8"
+>
+  <div class="flex flex-col gap-8 w-full md:max-w-3/5">
+    <h1 class="text-3xl font-light text-gray-900 mb-8">Visitor Check-Out</h1>
+    <div class="w-full flex justify-center items-center">
+      @if (currentStep() === 'search') {
+      <div class="bg-white p-8 rounded-xl shadow-sm w-full">
+        <h2 class="text-xl font-light text-gray-900 mb-6">
+          Enter Ticket Number
+        </h2>
+        <form
+          [formGroup]="checkoutForm"
+          (ngSubmit)="onSearch()"
+          class="flex flex-col gap-12"
+        >
+          <app-input
+            id="ticketNumber"
+            label="Ticket Number"
+            [control]="ticketNumberControl"
+            [required]="true"
+            placeholder="Enter ticket number (e.g., VIS-20250115-00123)"
+            [errorMessage]="getTicketNumberErrorMessage()"
+            [hasLeftIcon]="true"
+          >
+            <app-icon
+              slot="left-icon"
+              [name]="IconName.Ticket"
+              className="w-5 h-5 text-gray-400"
+            />
+          </app-input>
+          <app-button
+            type="submit"
+            [loading]="isSearching()"
+            [disabled]="!ticketNumberControl.valid || isSearching()"
+          >
+            Search Visitor
+          </app-button>
+        </form>
+      </div>
+      } @if (currentStep() === 'details' && visitorData()) {
+      <div class="bg-white p-8 rounded-xl shadow-sm w-full">
+        <h2 class="text-xl font-light text-gray-900 mb-6">Visitor Details</h2>
+        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div
+              class="w-12 h-12 bg-primary-blue/10 rounded-full flex items-center justify-center flex-shrink-0"
+            >
+              <app-icon
+                [name]="IconName.User"
+                className="w-6 h-6 text-primary-blue"
+              />
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-lg font-medium text-gray-900">
+                {{ visitorData()!.fullName }}
+              </p>
+              <div class="flex items-center gap-1 mt-1">
+                <app-icon
+                  [name]="IconName.Phone"
+                  className="w-4 h-4 text-gray-400"
+                />
+                <p class="text-sm text-gray-600">{{ visitorData()!.phone }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 pt-4 space-y-3">
+            <div class="flex items-start gap-3">
+              <app-icon
+                [name]="IconName.Ticket"
+                className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+              />
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-gray-500 font-light mb-1">
+                  Ticket Number
+                </p>
+                <p class="text-sm font-semibold text-gray-900">
+                  {{ visitorData()!.ticketNumber }}
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <app-icon
+                [name]="IconName.Card"
+                className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+              />
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-gray-500 font-light mb-1">
+                  Ghana Card Number
+                </p>
+                <p class="text-sm text-gray-900">
+                  {{ visitorData()!.ghanaCardNumber }}
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <app-icon
+                [name]="IconName.Briefcase"
+                className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+              />
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-gray-500 font-light mb-1">
+                  Staff Member
+                </p>
+                <p class="text-sm text-gray-900">
+                  {{ visitorData()!.staffMember }}
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <app-icon
+                [name]="IconName.Calendar"
+                className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+              />
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-gray-500 font-light mb-1">Purpose</p>
+                <p class="text-sm text-gray-900">
+                  {{ visitorData()!.purpose }}
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <app-icon
+                [name]="IconName.Clock"
+                className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+              />
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-gray-500 font-light mb-1">
+                  Check-In Time
+                </p>
+                <p class="text-sm text-gray-900">
+                  {{ visitorData()!.checkInTime | date : "short" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-4 w-full">
+          <app-button
+            type="button"
+            variant="secondary"
+            (click)="onNewCheckOut()"
+            class="w-full"
+          >
+            Cancel
+          </app-button>
+          <app-button
+            type="button"
+            [loading]="isCheckingOut()"
+            [disabled]="isCheckingOut()"
+            (click)="onCheckOut()"
+            class="w-full"
+          >
+            Complete Check-Out
+          </app-button>
+        </div>
+      </div>
+      } @if (currentStep() === 'confirmation' && checkOutData()) {
+      <div class="p-8 rounded-xl w-full md:max-w-2xl">
+        <div class="text-center flex flex-col gap-4">
+          <div class="flex justify-center">
+            <div
+              class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center"
+            >
+              <app-icon
+                [name]="IconName.CheckCircle"
+                className="w-10 h-10 text-green-600"
+              />
+            </div>
+          </div>
+          <div>
+            <h2 class="text-xl font-light text-gray-900 mb-2">
+              Check-Out Successful!
+            </h2>
+            <p class="text-sm text-gray-600">
+              Visitor has been checked out successfully.
+            </p>
+          </div>
+          <div
+            class="bg-gray-50 rounded-lg p-6 space-y-4 text-left max-w-md mx-auto"
+          >
+            <div>
+              <p class="text-sm text-gray-600 font-light mb-1">Ticket Number</p>
+              <p class="text-lg font-semibold text-gray-900">
+                {{ checkOutData()?.ticketNumber }}
+              </p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-600 font-light mb-1">Full Name</p>
+              <p class="text-base text-gray-900">
+                @if (checkOutData()) {
+                {{ checkOutData()!.visitor.fullName }}
+                }
+              </p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-600 font-light mb-1">
+                Check-Out Time
+              </p>
+              <p class="text-base text-gray-900">
+                @if (checkOutData()) {
+                {{ checkOutData()!.visitor.checkOutTime | date : "short" }}
+                }
+              </p>
+            </div>
+          </div>
+          <div class="pt-4">
+            <app-button type="button" (click)="onNewCheckOut()">
+              New Check-Out
+            </app-button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
   </div>
+
+  @if (currentStep() !== 'confirmation') {
+  <div class="flex-col justify-center items-center gap-2 hidden md:flex">
+    <span class="w-2 h-2 bg-primary-blue rounded-full"></span>
+    <span class="h-1/3 w-0.5 bg-primary-blue rounded-full"></span>
+    <span class="w-2 h-2 bg-primary-blue rounded-full"></span>
+    <span class="h-1/3 w-0.5 bg-primary-blue rounded-full"></span>
+    <span class="w-2 h-2 bg-primary-blue rounded-full"></span>
+  </div>
+
+  <div class="w-full md:w-2/5 flex flex-col">
+    <div class="p-6 flex flex-col h-full min-h-0">
+      <h2 class="text-xl font-light text-gray-900 mb-4">Recent Check-Outs</h2>
+      <div
+        class="flex flex-col gap-3 overflow-y-auto flex-1 pr-2 custom-scrollbar"
+        style="max-height: calc(100vh - 200px)"
+      >
+        @if (isLoadingRecentCheckOuts()) { @for (item of [1, 2, 3, 4, 5]; track
+        item) {
+        <div class="bg-gray-50 rounded-lg p-4 animate-pulse">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="w-10 h-10 bg-gray-200 rounded-full flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+              <div class="h-3 bg-gray-200 rounded w-1/2"></div>
+            </div>
+          </div>
+          <div class="space-y-2 mt-3 pt-3 border-t border-gray-200">
+            <div class="flex items-start gap-2">
+              <div
+                class="w-4 h-4 bg-gray-200 rounded mt-0.5 flex-shrink-0"
+              ></div>
+              <div class="flex-1 min-w-0">
+                <div class="h-3 bg-gray-200 rounded w-1/4 mb-1"></div>
+                <div class="h-3 bg-gray-200 rounded w-2/3"></div>
+              </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <div
+                class="w-4 h-4 bg-gray-200 rounded mt-0.5 flex-shrink-0"
+              ></div>
+              <div class="flex-1 min-w-0">
+                <div class="h-3 bg-gray-200 rounded w-1/4 mb-1"></div>
+                <div class="h-3 bg-gray-200 rounded w-1/2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        } } @else { @for (checkOut of recentCheckOuts(); track checkOut.id) {
+        <app-visitor-card [visitor]="checkOut" />
+        } }
+      </div>
+    </div>
+  </div>
+  }
 </div>

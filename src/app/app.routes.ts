@@ -4,6 +4,7 @@ import { CheckInComponent } from './pages/check-in/check-in.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
+import { userGuard } from './guards/user.guard';
 
 export const routes: Routes = [
   {
@@ -18,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'check-in',
     component: CheckInComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, userGuard],
   },
   {
     path: 'check-out',
@@ -26,7 +27,7 @@ export const routes: Routes = [
       import('./pages/check-out/check-out.component').then(
         (m) => m.CheckOutComponent
       ),
-    canActivate: [authGuard],
+    canActivate: [authGuard, userGuard],
   },
   {
     path: 'dashboard',
