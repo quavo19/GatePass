@@ -1,4 +1,9 @@
-import { Component, input, output } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icons/icons.component';
 import { IconName } from '../../constants/icons';
@@ -8,6 +13,7 @@ import { IconName } from '../../constants/icons';
   imports: [CommonModule, IconComponent],
   standalone: true,
   templateUrl: './pagination.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationComponent {
   protected readonly IconName = IconName;

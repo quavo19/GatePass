@@ -6,6 +6,7 @@ import {
   effect,
   signal,
   computed,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from '../icons/icons.component';
@@ -16,6 +17,7 @@ import { IconName } from '../../constants/icons';
   imports: [ReactiveFormsModule, CommonModule, IconComponent],
   standalone: true,
   templateUrl: './input.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
   protected readonly IconName = IconName;

@@ -1,4 +1,10 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  computed,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -11,6 +17,7 @@ import { IconName } from '../../constants/icons';
   imports: [CommonModule, RouterModule, IconComponent],
   standalone: true,
   templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
   private readonly authService = inject(AuthService);
@@ -38,7 +45,6 @@ export class SidebarComponent {
         this.router.navigate(['/login']);
       },
       error: () => {
-        // Even if logout fails, redirect anyway (state already cleared in service)
         this.router.navigate(['/login']);
         this.isLoggingOut.set(false);
       },

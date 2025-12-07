@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MostVisitedStaff } from '../../interfaces/api.interface';
 import { TOP_CARD_COLORS } from '../../constants/chart-colors';
@@ -15,6 +15,7 @@ interface StaffData {
   imports: [CommonModule],
   standalone: true,
   templateUrl: './top-staff.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopStaffComponent {
   public readonly staffData = input.required<MostVisitedStaff[]>();
@@ -40,6 +41,8 @@ export class TopStaffComponent {
   }
 
   protected getStaffColor(index: number): string {
-    return this.staffColors[index] || this.staffColors[this.staffColors.length - 1];
+    return (
+      this.staffColors[index] || this.staffColors[this.staffColors.length - 1]
+    );
   }
 }

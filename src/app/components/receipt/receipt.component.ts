@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icons/icons.component';
@@ -10,6 +10,7 @@ import { CheckInResponse } from '../../interfaces/api.interface';
   imports: [CommonModule, ButtonComponent, IconComponent],
   standalone: true,
   templateUrl: './receipt.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReceiptComponent {
   protected readonly IconName = IconName;

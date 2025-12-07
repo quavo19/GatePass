@@ -1,16 +1,12 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-export interface BarChartData {
-  label: string;
-  value: number;
-}
+import { BarChartData } from '../../interfaces/charts.intercae';
 
 @Component({
   selector: 'app-bar-chart',
   imports: [CommonModule],
-  standalone: true,
   templateUrl: './bar-chart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BarChartComponent {
   public readonly data = input.required<BarChartData[]>();
@@ -32,4 +28,3 @@ export class BarChartComponent {
     return `${(value / this.max) * 100}%`;
   }
 }
-

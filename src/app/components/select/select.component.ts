@@ -10,6 +10,7 @@ import {
   inject,
   computed,
   Signal,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +27,7 @@ export interface SelectOption {
   imports: [ReactiveFormsModule, CommonModule, IconComponent],
   standalone: true,
   templateUrl: './select.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {
   protected readonly IconName = IconName;
@@ -37,7 +39,9 @@ export class SelectComponent {
   public readonly required = input<boolean>(false);
   public readonly isDisabled = input<boolean>(false);
   public readonly id = input.required<string>();
-  public readonly options = input.required<SelectOption[] | Signal<SelectOption[]>>();
+  public readonly options = input.required<
+    SelectOption[] | Signal<SelectOption[]>
+  >();
   public readonly size = input<'sm' | 'md' | 'lg' | 'xl'>('md');
 
   protected readonly resolvedOptions = computed<SelectOption[]>(() => {

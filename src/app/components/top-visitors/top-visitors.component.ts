@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MostFrequentVisitor } from '../../interfaces/api.interface';
 import { TOP_CARD_COLORS } from '../../constants/chart-colors';
@@ -15,6 +15,7 @@ interface VisitorData {
   imports: [CommonModule],
   standalone: true,
   templateUrl: './top-visitors.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopVisitorsComponent {
   public readonly visitorData = input.required<MostFrequentVisitor[]>();
@@ -40,7 +41,9 @@ export class TopVisitorsComponent {
   }
 
   protected getVisitorColor(index: number): string {
-    return this.visitorColors[index] || this.visitorColors[this.visitorColors.length - 1];
+    return (
+      this.visitorColors[index] ||
+      this.visitorColors[this.visitorColors.length - 1]
+    );
   }
 }
-

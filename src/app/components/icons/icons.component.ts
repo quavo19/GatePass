@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconName, IconNameType } from '../../constants/icons';
 
@@ -7,6 +7,7 @@ import { IconName, IconNameType } from '../../constants/icons';
   imports: [CommonModule],
   standalone: true,
   templateUrl: './icons.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {
   protected readonly iconNames = IconName;

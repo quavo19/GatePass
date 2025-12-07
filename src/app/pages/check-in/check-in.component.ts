@@ -53,7 +53,6 @@ import { CheckInStep, FormStep } from '../../types/check-in.types';
     VisitorCardComponent,
     ReceiptComponent,
   ],
-  standalone: true,
   templateUrl: './check-in.component.html',
 })
 export class CheckInComponent {

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DepartmentVisit } from '../../interfaces/api.interface';
 import { TOP_CARD_COLORS } from '../../constants/chart-colors';
@@ -14,6 +14,7 @@ interface DepartmentData {
   imports: [CommonModule],
   standalone: true,
   templateUrl: './top-departments.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopDepartmentsComponent {
   public readonly departmentData = input.required<DepartmentVisit[]>();

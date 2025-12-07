@@ -3,7 +3,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { VisitorService } from '../../services/visitor.service';
 import { ToastService } from '../../services/toast.service';
-import { IconComponent } from '../../components/icons/icons.component';
 import { IconName } from '../../constants/icons';
 import {
   AnalyticsResponse,
@@ -12,13 +11,11 @@ import {
   MostVisitedStaff,
   MostFrequentVisitor,
 } from '../../interfaces/api.interface';
-import {
-  BarChartComponent,
-  BarChartData,
-} from '../../components/bar-chart/bar-chart.component';
+import { BarChartComponent } from '../../components/bar-chart/bar-chart.component';
 import { TopStaffComponent } from '../../components/top-staff/top-staff.component';
 import { TopVisitorsComponent } from '../../components/top-visitors/top-visitors.component';
 import { TopDepartmentsComponent } from '../../components/top-departments/top-departments.component';
+import { BarChartData } from '../../interfaces/charts.intercae';
 
 @Component({
   selector: 'app-dashboard',
@@ -79,7 +76,6 @@ export class DashboardComponent implements OnInit {
   }
 
   private updateCharts(data: AnalyticsResponse['data']): void {
-    // Monthly Bar Chart
     this.monthlyChartData.set(
       data.monthlyVisits.map((m) => ({
         label: m.monthName,
