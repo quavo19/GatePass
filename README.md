@@ -43,15 +43,19 @@ The app is fully responsive and styled using **Tailwind CSS**.
 
 ### User Check-In
 
-![User Check-In](./screenshots/user-checkin.png)
+<img width="1440" height="813" alt="Screenshot 2025-12-07 at 8 53 41 pm" src="https://github.com/user-attachments/assets/aeb6f5bc-a761-41c5-8124-e25ed9d1f81f" />
+
+### User Check-Out
+<img width="1440" height="811" alt="Screenshot 2025-12-07 at 8 53 22 pm" src="https://github.com/user-attachments/assets/da289374-bf8e-4b1c-94a6-59c7902cc71e" />
 
 ### Admin Dashboard
+<img width="1440" height="811" alt="Screenshot 2025-12-07 at 8 56 13 pm" src="https://github.com/user-attachments/assets/a6dc582a-acae-4ad2-886c-ba2df06a7ab5" />
 
-![Admin Dashboard](./screenshots/admin-dashboard.png)
+<img width="1440" height="814" alt="Screenshot 2025-12-07 at 8 56 19 pm" src="https://github.com/user-attachments/assets/419cf460-9891-4858-a712-e29e0741cfe0" />
 
-_(Replace placeholders with actual screenshots.)_
+### Admin Logs
+<img width="1440" height="813" alt="Screenshot 2025-12-07 at 8 56 25 pm" src="https://github.com/user-attachments/assets/891511e9-19e7-488d-a7b3-51c8e31229f1" />
 
----
 
 ## 💻 Tech Stack
 
