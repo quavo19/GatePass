@@ -1,8 +1,9 @@
 import {
   Component,
   inject,
-  computed,
   signal,
+  computed,
+  HostListener,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,8 +15,8 @@ import { IconName } from '../../constants/icons';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterModule, IconComponent],
   standalone: true,
+  imports: [CommonModule, RouterModule, IconComponent],
   templateUrl: './sidebar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -28,6 +29,16 @@ export class SidebarComponent {
   protected readonly isLoggingOut = signal(false);
   protected readonly currentUser = this.authService.getCurrentUserSignal();
 
+  private readonly windowWidth = signal(window.innerWidth);
+  protected readonly isMobile = computed(() => this.windowWidth() < 768);
+  protected readonly isOpen = signal(false);
+
+  @HostListener('window:resize')
+  onResize() {
+    this.windowWidth.set(window.innerWidth);
+    if (!this.isMobile()) this.isOpen.set(false);
+  }
+
   protected getVisibleItems() {
     const user = this.currentUser();
     if (!user) return [];
@@ -36,15 +47,28 @@ export class SidebarComponent {
     );
   }
 
+  toggle() {
+    if (this.isMobile()) this.isOpen.update((v) => !v);
+  }
+
+  close() {
+    this.isOpen.set(false);
+  }
+
+  onNavClick() {
+    if (this.isMobile()) this.close();
+  }
+
   protected logout(): void {
     if (this.isLoggingOut()) return;
-
     this.isLoggingOut.set(true);
     this.authService.logout().subscribe({
       next: () => {
+        this.close();
         this.router.navigate(['/login']);
       },
       error: () => {
+        this.close();
         this.router.navigate(['/login']);
         this.isLoggingOut.set(false);
       },
