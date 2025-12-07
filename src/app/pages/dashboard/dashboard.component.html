@@ -13,7 +13,6 @@
       </div>
     </div>
     } @else {
-    <!-- Monthly Visits Trend - Full Width -->
     <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
       <h2 class="text-xl font-light text-gray-900 mb-4">
         Monthly Visits Trend
@@ -23,28 +22,37 @@
       </div>
     </div>
 
-    <!-- Department Visits -->
     <div class="mb-6">
       <h2 class="text-xl font-light text-gray-900 mb-4">
         Visits by Department
       </h2>
-      <app-top-departments [departmentData]="departmentVisits()" />
+      <div class="overflow-x-auto">
+        <div class="md:min-w-[768px]">
+          <app-top-departments [departmentData]="departmentVisits()" />
+        </div>
+      </div>
     </div>
 
-    <!-- Most Visited Staff -->
     <div class="mb-6">
       <h2 class="text-xl font-light text-gray-900 mb-4">
         Most Visited Staff Members
       </h2>
-      <app-top-staff [staffData]="mostVisitedStaff()" />
+      <div class="overflow-x-auto">
+        <div class="md:min-w-[768px]">
+          <app-top-staff [staffData]="mostVisitedStaff()" />
+        </div>
+      </div>
     </div>
 
-    <!-- Most Frequent Visitors -->
     <div>
       <h2 class="text-xl font-light text-gray-900 mb-4">
         Most Frequent Visitors
       </h2>
-      <app-top-visitors [visitorData]="mostFrequentVisitors()" />
+      <div class="overflow-x-auto">
+        <div class="md:min-w-[768px]">
+          <app-top-visitors [visitorData]="mostFrequentVisitors()" />
+        </div>
+      </div>
     </div>
     }
   </div>

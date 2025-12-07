@@ -2,13 +2,7 @@ import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MostVisitedStaff } from '../../interfaces/api.interface';
 import { TOP_CARD_COLORS } from '../../constants/chart-colors';
-
-interface StaffData {
-  readonly name: string;
-  readonly department: string;
-  readonly visitCount: number;
-  readonly percentage: number;
-}
+import { StaffData } from '../../interfaces/dashboard.interface';
 
 @Component({
   selector: 'app-top-staff',

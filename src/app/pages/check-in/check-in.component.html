@@ -1,6 +1,6 @@
 <div
   [class]="
-    'bg-gray-50 p-8 min-h-full max-w-[1600px] mx-auto flex md:flex-row flex-col w-full gap-8 ' +
+    'bg-gray-50 md:p-8 p-4 min-h-full max-w-[1600px] mx-auto flex md:flex-row flex-col w-full gap-8 ' +
     (currentStep() === 'confirmation' ? 'md:flex-col' : '')
   "
 >
@@ -13,7 +13,7 @@
     <h1 class="text-3xl font-light text-gray-900 mb-8">Visitor Check-In</h1>
     <div class="flex-1">
       @if (currentStep() === 'form') {
-      <div class="bg-white p-8">
+      <div class="bg-white md:p-8 p-4">
         <div class="mb-8">
           <div class="flex items-center justify-between mb-2">
             <span class="text-sm font-light text-gray-600">
@@ -285,7 +285,7 @@
   </div>
 
   <div class="w-full md:w-2/5 flex flex-col">
-    <div class="p-6 flex flex-col h-full min-h-0">
+    <div class="md:p-6 p-4 flex flex-col h-full min-h-0">
       <h2 class="text-xl font-light text-gray-900 mb-4">Recent Check-Ins</h2>
       <div
         class="flex flex-col gap-3 overflow-y-auto flex-1 pr-2 custom-scrollbar"

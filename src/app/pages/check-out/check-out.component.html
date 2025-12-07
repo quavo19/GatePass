@@ -1,11 +1,11 @@
 <div
-  class="bg-gray-50 p-8 min-h-full max-w-[1600px] mx-auto flex md:flex-row flex-col w-full gap-8"
+  class="bg-gray-50 md:p-8 p-4 min-h-full max-w-[1600px] mx-auto flex md:flex-row flex-col w-full gap-8"
 >
   <div class="flex flex-col gap-8 w-full md:max-w-3/5">
     <h1 class="text-3xl font-light text-gray-900 mb-8">Visitor Check-Out</h1>
     <div class="w-full flex justify-center items-center">
       @if (currentStep() === 'search') {
-      <div class="bg-white p-8 rounded-xl shadow-sm w-full">
+      <div class="bg-white md:p-8 p-4 rounded-xl shadow-sm w-full">
         <h2 class="text-xl font-light text-gray-900 mb-6">
           Enter Ticket Number
         </h2>
@@ -230,7 +230,7 @@
   </div>
 
   <div class="w-full md:w-2/5 flex flex-col">
-    <div class="p-6 flex flex-col h-full min-h-0">
+    <div class="md:p-6 p-4 flex flex-col h-full min-h-0">
       <h2 class="text-xl font-light text-gray-900 mb-4">Recent Check-Outs</h2>
       <div
         class="flex flex-col gap-3 overflow-y-auto flex-1 pr-2 custom-scrollbar"

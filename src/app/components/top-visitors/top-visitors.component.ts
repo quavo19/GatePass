@@ -2,13 +2,7 @@ import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MostFrequentVisitor } from '../../interfaces/api.interface';
 import { TOP_CARD_COLORS } from '../../constants/chart-colors';
-
-interface VisitorData {
-  readonly fullName: string;
-  readonly phone: string;
-  readonly visitCount: number;
-  readonly percentage: number;
-}
+import { VisitorData } from '../../interfaces/dashboard.interface';
 
 @Component({
   selector: 'app-top-visitors',
