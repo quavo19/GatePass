@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://gatepassapi-3fpc.onrender.com',
+  apiBaseUrl: 'https://api.gatepass.snakekans.com',
 };
