@@ -61,8 +61,7 @@ describe('InputComponent', () => {
   });
 
   it('should handle icon positioning', () => {
-    fixture.componentRef.setInput('hasIcon', true);
-    fixture.componentRef.setInput('iconPosition', 'right');
+    fixture.componentRef.setInput('hasRightIcon', true);
     fixture.componentRef.setInput('id', 'test-input');
     fixture.componentRef.setInput('label', 'Test Label');
 
